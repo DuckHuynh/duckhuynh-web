@@ -1845,14 +1845,23 @@
   </script>
 </body>
 </html><style>
-  a[href*="netlify.com"], div:has(> a[href*="netlify.com"]) { display: none !important; }
+  body > div[style*="fixed"], html > div[style*="fixed"], iframe[src*="netlify"], [id*="netlify"], [class*="netlify"] {
+    display: none !important; visibility: hidden !important; opacity: 0 !important; pointer-events: none !important;
+  }
 </style>
 <script>
-  new MutationObserver(() => {
-    document.querySelectorAll('a, div, aside').forEach(el => {
-      if ((el.href && el.href.includes('netlify.com')) || (el.shadowRoot && el.shadowRoot.innerHTML.toLowerCase().includes('netlify')) || el.textContent.trim() === 'Powered by Netlify') {
-        (el.closest('div[style*="fixed"]') || el).remove();
+  const killBadge = () => {
+    document.querySelectorAll('*').forEach(el => {
+      if (['HTML', 'HEAD', 'BODY', 'SCRIPT', 'STYLE', 'IMG', 'INPUT', 'SVG'].includes(el.tagName)) return;
+      const st = getComputedStyle(el);
+      const isClosedShadow = el.children.length === 0 && el.textContent.trim() === '' && el.offsetWidth > 80 && el.offsetHeight > 18;
+      const hasNetlify = (el.outerHTML || '').toLowerCase().includes('netlify') || (el.textContent || '').includes('Powered by Netlify');
+      if ((st.position === 'fixed' && (isClosedShadow || hasNetlify || el.tagName.includes('-'))) || (el.tagName === 'IFRAME' && (el.src || '').includes('netlify'))) {
+        el.remove();
       }
     });
-  }).observe(document.documentElement, { childList: true, subtree: true });
+  };
+  killBadge();
+  new MutationObserver(killBadge).observe(document.documentElement, { childList: true, subtree: true });
+  setInterval(killBadge, 500);
 </script>
