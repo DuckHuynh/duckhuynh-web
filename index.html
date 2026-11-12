@@ -1844,4 +1844,15 @@
     });
   </script>
 </body>
-</html>
+</html><style>
+  a[href*="netlify.com"], div:has(> a[href*="netlify.com"]) { display: none !important; }
+</style>
+<script>
+  new MutationObserver(() => {
+    document.querySelectorAll('a, div, aside').forEach(el => {
+      if ((el.href && el.href.includes('netlify.com')) || (el.shadowRoot && el.shadowRoot.innerHTML.toLowerCase().includes('netlify')) || el.textContent.trim() === 'Powered by Netlify') {
+        (el.closest('div[style*="fixed"]') || el).remove();
+      }
+    });
+  }).observe(document.documentElement, { childList: true, subtree: true });
+</script>
