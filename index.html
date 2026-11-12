@@ -1,0 +1,1847 @@
+<!DOCTYPE html>
+<html lang="vi" class="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover" />
+  <title>Duckhuynh — Tài Khoản & Phần Mềm Bản Quyền Chính Hãng</title>
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Fonts: Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,800;1,900&display=swap" rel="stylesheet" />
+
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
+          }
+        }
+      }
+    };
+  </script>
+
+  <style>
+    /* Nền đen xanh sâu chuẩn Cyberpunk / Cyber Neon */
+    html, body {
+      background-color: #070b14;
+      color: #f8fafc;
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      -webkit-tap-highlight-color: transparent;
+      overflow-x: hidden;
+    }
+
+    /* Lưới kỹ thuật số mờ màu cyan ở Header */
+    .cyber-header-grid {
+      background-image:
+        linear-gradient(to right, rgba(34, 240, 255, 0.14) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(34, 240, 255, 0.14) 1px, transparent 1px);
+      background-size: 20px 20px;
+      mask-image: radial-gradient(ellipse at top center, rgba(0, 0, 0, 1) 45%, rgba(0, 0, 0, 0) 95%);
+      -webkit-mask-image: radial-gradient(ellipse at top center, rgba(0, 0, 0, 1) 45%, rgba(0, 0, 0, 0) 95%);
+    }
+
+    /* Chữ nghiêng đậm phát sáng xanh cyan Duckhuynh */
+    .duckhuynh-logo {
+      background: linear-gradient(180deg, #e0fdff 0%, #22f0ff 55%, #06b6d4 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      filter: drop-shadow(0 0 10px rgba(34, 240, 255, 0.75)) drop-shadow(0 0 22px rgba(34, 240, 255, 0.35));
+    }
+
+    /* Viền avatar tròn phát sáng đỏ neon */
+    .avatar-neon-ring {
+      box-shadow:
+        0 0 0 2px #ff3b4e,
+        0 0 16px rgba(255, 59, 78, 0.85),
+        inset 0 0 10px rgba(255, 59, 78, 0.55);
+    }
+
+    /* Thanh tìm kiếm kính mờ dạng viên thuốc */
+    .cyber-search-pill {
+      background: rgba(12, 18, 30, 0.92);
+      border: 1px solid rgba(56, 189, 248, 0.28);
+      box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.75), 0 0 14px rgba(255, 59, 78, 0.08);
+    }
+    .cyber-search-pill:focus-within {
+      border-color: rgba(34, 240, 255, 0.78);
+      box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.75), 0 0 18px rgba(34, 240, 255, 0.28);
+    }
+
+    /* Thẻ sản phẩm nền tối bo góc viền đỏ neon */
+    .product-card-neon {
+      background: linear-gradient(180deg, #0e1524 0%, #090e19 100%);
+      border: 1px solid rgba(255, 59, 78, 0.48);
+      border-radius: 16px;
+      box-shadow:
+        0 8px 24px rgba(0, 0, 0, 0.75),
+        0 0 12px rgba(255, 59, 78, 0.08),
+        inset 0 1px 0 rgba(255, 255, 255, 0.05);
+      transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .product-card-neon:hover,
+    .product-card-neon:active {
+      border-color: rgba(255, 59, 78, 0.95);
+      box-shadow:
+        0 12px 28px -6px rgba(255, 59, 78, 0.32),
+        0 0 18px rgba(34, 240, 255, 0.16);
+      transform: translateY(-2px);
+    }
+
+    /* Nút Xem chi tiết */
+    .btn-detail-dark {
+      background: rgba(15, 22, 36, 0.96);
+      border: 1px solid rgba(148, 163, 184, 0.42);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08);
+      transition: all 0.18s ease;
+    }
+    .btn-detail-dark:hover {
+      border-color: rgba(34, 240, 255, 0.75);
+      color: #67e8f9;
+      background: rgba(20, 30, 48, 1);
+    }
+
+    /* Nút Mua ngay đỏ hồng neon phát sáng */
+    .btn-neon-red {
+      background: linear-gradient(180deg, #ff4d5e 0%, #ff3347 55%, #e11d38 100%);
+      box-shadow:
+        0 0 16px rgba(255, 59, 78, 0.65),
+        inset 0 1px 1px rgba(255, 255, 255, 0.35);
+      transition: all 0.18s ease;
+    }
+    .btn-neon-red:hover {
+      box-shadow:
+        0 0 24px rgba(255, 59, 78, 0.9),
+        inset 0 1px 1px rgba(255, 255, 255, 0.45);
+      filter: brightness(1.06);
+    }
+
+    /* ==================== CRITICAL IPHONE VIEWPORT & MODAL FIX ==================== */
+    .cyber-modal-overlay {
+      position: fixed;
+      inset: 0;
+      width: 100%;
+      height: 100vh;
+      height: 100dvh;
+      max-height: 100vh;
+      max-height: 100dvh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: calc(12px + env(safe-area-inset-top, 0px)) 12px calc(14px + env(safe-area-inset-bottom, 0px));
+      box-sizing: border-box;
+      background-color: rgba(3, 6, 12, 0.86);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      z-index: 50;
+    }
+
+    .cyber-modal-overlay.hidden {
+      display: none !important;
+    }
+
+    .cyber-modal-card {
+      width: 100%;
+      max-width: 460px;
+      max-height: 100%;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      border-radius: 24px;
+      background: #0b111e;
+      box-sizing: border-box;
+    }
+
+    .cyber-modal-header {
+      flex-shrink: 0;
+    }
+
+    .cyber-modal-body {
+      flex: 1 1 auto;
+      min-height: 0;
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
+      overscroll-behavior: contain;
+    }
+
+    .cyber-modal-footer {
+      flex-shrink: 0;
+    }
+
+    /* Ẩn thanh cuộn ngang cho danh mục */
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .no-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+
+    /* Animation mở Modal mượt */
+    @keyframes popIn {
+      from {
+        opacity: 0;
+        transform: scale(0.96);
+      }
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+    .animate-pop {
+      animation: popIn 0.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+
+    .custom-scroll::-webkit-scrollbar {
+      width: 4px;
+    }
+    .custom-scroll::-webkit-scrollbar-track {
+      background: #070b14;
+    }
+    .custom-scroll::-webkit-scrollbar-thumb {
+      background: #1e293b;
+      border-radius: 9999px;
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col selection:bg-cyan-500/30 selection:text-cyan-200">
+
+  <!-- ==================== HEADER CYBERPUNK ==================== -->
+  <header class="relative sticky top-0 z-30 bg-[#070b14]/95 backdrop-blur-xl border-b border-cyan-500/15" style="padding-top: env(safe-area-inset-top, 0px);">
+    <div class="absolute inset-0 cyber-header-grid pointer-events-none"></div>
+    <div class="absolute -top-16 left-6 w-52 h-32 bg-cyan-500/15 rounded-full blur-3xl pointer-events-none"></div>
+    <div class="absolute -top-14 right-4 w-44 h-32 bg-red-600/20 rounded-full blur-3xl pointer-events-none"></div>
+
+    <div class="relative max-w-md sm:max-w-2xl lg:max-w-5xl mx-auto px-3.5 sm:px-6 pt-3 pb-2.5">
+      <!-- Hàng trên: Logo Duckhuynh + Nút Quy định + Avatar Spiderman Zalo -->
+      <div class="flex items-center justify-between gap-2">
+        <div class="min-w-0 flex-1">
+          <div class="flex items-center gap-2 flex-wrap">
+            <h1 class="text-[27px] sm:text-4xl font-black italic tracking-tight leading-none duckhuynh-logo select-none">
+              Duckhuynh
+            </h1>
+            <button
+              type="button"
+              onclick="openPolicyModal()"
+              class="px-2.5 py-1 rounded-full bg-cyan-500/10 hover:bg-cyan-500/20 text-cyan-300 border border-cyan-500/30 text-[10px] sm:text-[11px] font-bold transition active:scale-95"
+            >
+              Quy định &amp; Bảo hành
+            </button>
+          </div>
+          <p class="text-[9.5px] sm:text-xs font-bold tracking-[0.06em] text-slate-200/90 uppercase mt-1.5 truncate">
+            TÀI KHOẢN &amp; PHẦN MỀM BẢN QUYỀN CHÍNH HÃNG
+          </p>
+        </div>
+
+        <!-- Avatar Spiderman viền đỏ neon Liên hệ Zalo -->
+        <button
+          type="button"
+          onclick="openZaloModal()"
+          class="group flex flex-col items-center shrink-0 focus:outline-none active:scale-95 transition"
+          aria-label="Liên hệ Zalo 0394602830"
+        >
+          <div class="w-11 h-11 sm:w-14 sm:h-14 rounded-full avatar-neon-ring overflow-hidden bg-gradient-to-b from-red-900 via-slate-900 to-blue-950 p-0.5 relative">
+            <svg viewBox="0 0 80 80" class="w-full h-full rounded-full" fill="none">
+              <defs>
+                <radialGradient id="spideyBg" cx="50%" cy="35%" r="65%">
+                  <stop offset="0%" stop-color="#dc2626" />
+                  <stop offset="55%" stop-color="#7f1d1d" />
+                  <stop offset="100%" stop-color="#090d16" />
+                </radialGradient>
+                <linearGradient id="spideySuit" x1="20" y1="15" x2="60" y2="70" gradientUnits="userSpaceOnUse">
+                  <stop offset="0%" stop-color="#ef4444" />
+                  <stop offset="65%" stop-color="#b91c1c" />
+                  <stop offset="100%" stop-color="#1d4ed8" />
+                </linearGradient>
+              </defs>
+              <circle cx="40" cy="40" r="40" fill="url(#spideyBg)" />
+              <g stroke="#fca5a5" stroke-opacity="0.22" stroke-width="0.9">
+                <circle cx="40" cy="40" r="14" />
+                <circle cx="40" cy="40" r="24" />
+                <circle cx="40" cy="40" r="34" />
+                <line x1="40" y1="4" x2="40" y2="76" />
+                <line x1="4" y1="40" x2="76" y2="40" />
+                <line x1="14" y1="14" x2="66" y2="66" />
+                <line x1="66" y1="14" x2="14" y2="66" />
+              </g>
+              <path d="M16 74C18 59 27 53 40 53C53 53 62 59 64 74H16Z" fill="#1e3a8a" />
+              <path d="M27 54L40 72L53 54C49 52.5 44.5 52 40 52C35.5 52 31 52.5 27 54Z" fill="#dc2626" />
+              <ellipse cx="40" cy="36" rx="14.5" ry="18" fill="url(#spideySuit)" stroke="#450a0a" stroke-width="1.2" />
+              <path d="M28.5 33.5C30.5 29.5 35.5 30.5 37.5 35.5C34.5 38 30 37.5 28.5 33.5Z" fill="#ffffff" stroke="#090d16" stroke-width="2" />
+              <path d="M51.5 33.5C49.5 29.5 44.5 30.5 42.5 35.5C45.5 38 50 37.5 51.5 33.5Z" fill="#ffffff" stroke="#090d16" stroke-width="2" />
+              <g transform="translate(49, 36) rotate(-12)">
+                <rect x="3" y="10" width="11" height="14" rx="4" fill="#dc2626" stroke="#450a0a" stroke-width="1" />
+                <rect x="2" y="1" width="3.2" height="11" rx="1.6" fill="#ef4444" stroke="#450a0a" stroke-width="0.9" />
+                <rect x="11.5" y="2" width="3.2" height="10.5" rx="1.6" fill="#ef4444" stroke="#450a0a" stroke-width="0.9" />
+                <rect x="5.5" y="7" width="5.5" height="6" rx="2" fill="#b91c1c" stroke="#450a0a" stroke-width="0.9" />
+              </g>
+            </svg>
+          </div>
+          <span class="text-[10px] sm:text-[11px] font-bold text-slate-200 group-hover:text-cyan-300 mt-1 tracking-tight transition">
+            Liên hệ Zalo
+          </span>
+        </button>
+      </div>
+
+      <!-- Thanh tìm kiếm viên thuốc -->
+      <div class="mt-2">
+        <div class="cyber-search-pill rounded-full flex items-center px-3.5 py-2 transition">
+          <input
+            id="searchInput"
+            type="text"
+            placeholder="Tìm kiếm tài khoản, phần mềm..."
+            oninput="handleSearch(this.value)"
+            class="w-full bg-transparent text-xs sm:text-sm text-slate-100 placeholder-slate-400 focus:outline-none pr-2"
+          />
+          <button
+            id="clearSearchBtn"
+            type="button"
+            onclick="clearSearch()"
+            class="hidden text-slate-400 hover:text-white p-1 mr-1"
+            aria-label="Xóa tìm kiếm"
+          >
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+          <svg class="w-4 h-4 sm:w-5 sm:h-5 text-red-500 shrink-0 drop-shadow-[0_0_6px_rgba(239,68,68,0.8)]" fill="none" stroke="currentColor" stroke-width="2.3" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-4.35-4.35M17 11a6 6 0 11-12 0 6 6 0 0112 0z" />
+          </svg>
+        </div>
+      </div>
+
+      <!-- Thanh danh mục viên thuốc -->
+      <nav id="categoryNav" class="mt-2 flex items-center gap-1.5 sm:gap-2 overflow-x-auto no-scrollbar pb-0.5" aria-label="Danh mục sản phẩm">
+        <!-- Render động bằng JS -->
+      </nav>
+    </div>
+  </header>
+
+  <!-- ==================== MAIN PRODUCT GRID ==================== -->
+  <main class="flex-1 max-w-md sm:max-w-2xl lg:max-w-5xl w-full mx-auto px-3 sm:px-6 pt-3 pb-8">
+    <div class="flex items-center justify-between gap-2 mb-2.5 px-0.5">
+      <div class="flex items-center gap-1.5 text-[11px] text-slate-400">
+        <span id="syncDot" class="w-1.5 h-1.5 rounded-full bg-cyan-400 shadow-[0_0_8px_#22d3ee]"></span>
+        <span id="catalogSummary">13 sản phẩm bản quyền</span>
+      </div>
+
+      <div class="flex items-center gap-1.5">
+        <button
+          type="button"
+          onclick="syncGoogleSheets(true)"
+          title="Làm mới bảng giá từ Google Sheets"
+          class="p-1.5 rounded-full bg-[#0d1422] border border-slate-800 hover:border-cyan-400/50 text-cyan-400 transition active:scale-90"
+          aria-label="Đồng bộ lại bảng giá"
+        >
+          <svg id="syncRefreshIcon" class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+          </svg>
+        </button>
+
+        <select
+          id="sortSelect"
+          onchange="handleSort(this.value)"
+          aria-label="Sắp xếp sản phẩm"
+          class="bg-[#0d1422] border border-slate-800 rounded-full px-2.5 py-1 text-[11px] text-slate-300 focus:border-cyan-400/60 focus:outline-none"
+        >
+          <option value="featured">Nổi bật</option>
+          <option value="in-stock">Còn hàng</option>
+          <option value="price-asc">Giá thấp → cao</option>
+          <option value="price-desc">Giá cao → thấp</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Lưới thẻ sản phẩm -->
+    <div id="productGrid" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-2.5 sm:gap-4">
+      <!-- Render động bằng JS -->
+    </div>
+
+    <!-- Trạng thái trống khi tìm kiếm không khớp -->
+    <div id="emptyState" class="hidden text-center py-12 px-4 rounded-2xl bg-[#0d1422] border border-red-500/30 mt-3">
+      <p class="text-sm font-bold text-white">Không tìm thấy sản phẩm nào khớp từ khóa</p>
+      <p class="text-xs text-slate-400 mt-1">Thử tìm tên khác hoặc quay lại danh mục Tất cả nhé.</p>
+      <button
+        type="button"
+        onclick="resetFilters()"
+        class="mt-3.5 px-4 py-2 rounded-full btn-neon-red text-white text-xs font-bold"
+      >
+        Xem tất cả sản phẩm
+      </button>
+    </div>
+  </main>
+
+  <!-- ==================== FOOTER ==================== -->
+  <footer class="border-t border-slate-800/70 bg-[#05080e] py-5 px-4" style="padding-bottom: calc(20px + env(safe-area-inset-bottom, 0px));">
+    <div class="max-w-md sm:max-w-2xl lg:max-w-5xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-2.5 text-center sm:text-left">
+      <div>
+        <span class="text-base font-black italic duckhuynh-logo">Duckhuynh</span>
+        <p class="text-[11px] text-slate-400 mt-0.5">
+          Tài khoản &amp; Phần mềm bản quyền chính hãng • Bảo hành full thời hạn gói.
+        </p>
+      </div>
+      <div class="flex items-center gap-2">
+        <button
+          type="button"
+          onclick="openPolicyModal()"
+          class="px-3 py-1.5 rounded-full bg-slate-800/80 hover:bg-slate-700 text-slate-200 border border-slate-700 text-xs font-semibold transition"
+        >
+          Quy định &amp; Bảo hành
+        </button>
+        <button
+          type="button"
+          onclick="openZaloModal()"
+          class="px-3.5 py-1.5 rounded-full bg-red-500/15 hover:bg-red-500/25 text-red-300 border border-red-500/40 text-xs font-bold transition"
+        >
+          Zalo: 0394602830
+        </button>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ==================== MODAL CHI TIẾT SẢN PHẨM (100dvh SAFE CENTERED FLEX) ==================== -->
+  <div
+    id="detailModal"
+    class="cyber-modal-overlay hidden"
+    onclick="closeModalOnBackdrop(event, 'detailModal')"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="modalTitle"
+  >
+    <div class="cyber-modal-card animate-pop border border-red-500/50 shadow-[0_0_50px_rgba(239,68,68,0.22)]">
+      <!-- 1. PINNED HEADER (LUÔN HIỂN THỊ 100%, KHÔNG BAO GIỜ BỊ CẮT NÚT X) -->
+      <div class="cyber-modal-header flex items-center justify-between gap-2.5 px-3.5 py-3 border-b border-slate-800/90 bg-[#080d17]">
+        <div class="flex items-center gap-2.5 min-w-0 flex-1">
+          <div id="modalArtworkBox" class="w-12 h-12 sm:w-14 sm:h-14 rounded-xl overflow-hidden border border-cyan-500/35 shrink-0 shadow-[0_0_15px_rgba(34,211,238,0.2)]">
+            <!-- Artwork 3D Neon -->
+          </div>
+          <div class="min-w-0 flex-1">
+            <div class="flex items-center gap-1.5 flex-wrap">
+              <span id="modalCategory" class="text-[9.5px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full bg-cyan-500/15 text-cyan-300 border border-cyan-500/30">
+                Tài khoản AI
+              </span>
+              <span id="modalBadge" class="hidden text-[9.5px] font-extrabold uppercase tracking-wider px-2 py-0.5 rounded-full">
+                PHỔ BIẾN
+              </span>
+            </div>
+            <h2 id="modalTitle" class="text-sm sm:text-base font-extrabold text-white mt-1 leading-snug truncate">
+              Tên sản phẩm
+            </h2>
+          </div>
+        </div>
+
+        <button
+          type="button"
+          onclick="closeModal('detailModal')"
+          class="w-9 h-9 rounded-full bg-slate-800/95 hover:bg-red-500/25 text-slate-200 hover:text-white border border-slate-700 hover:border-red-500/50 flex items-center justify-center transition shrink-0 active:scale-90"
+          aria-label="Đóng cửa sổ"
+        >
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+      </div>
+
+      <!-- 2. SCROLLABLE BODY (CUỘN MƯỢT CÁC GÓI MÀ KHÔNG ĐẨY HEADER/FOOTER) -->
+      <div class="cyber-modal-body custom-scroll p-3.5 space-y-3">
+        <!-- Mô tả sản phẩm -->
+        <p id="modalDesc" class="text-xs text-slate-300 leading-relaxed bg-[#10182a] px-3 py-2.5 rounded-xl border border-slate-800/90">
+          Mô tả sản phẩm...
+        </p>
+
+        <!-- 3 Ô Cam Kết gọn gàng -->
+        <div class="grid grid-cols-3 gap-1.5 sm:gap-2">
+          <div class="p-2 rounded-xl bg-[#10182a] border border-cyan-500/20 text-center">
+            <div class="w-6 h-6 mx-auto rounded-lg bg-cyan-500/15 text-cyan-400 flex items-center justify-center mb-1">
+              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" />
+              </svg>
+            </div>
+            <p id="modalCommit1Title" class="text-[10.5px] font-bold text-white leading-tight">Giao tự động</p>
+            <p id="modalCommit1Sub" class="text-[9.5px] text-slate-400 mt-0.5 leading-tight">Sau 3 - 5 giây</p>
+          </div>
+
+          <div class="p-2 rounded-xl bg-[#10182a] border border-emerald-500/20 text-center">
+            <div class="w-6 h-6 mx-auto rounded-lg bg-emerald-500/15 text-emerald-400 flex items-center justify-center mb-1">
+              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+              </svg>
+            </div>
+            <p class="text-[10.5px] font-bold text-white leading-tight">Bảo hành full</p>
+            <p class="text-[9.5px] text-slate-400 mt-0.5 leading-tight">Trọn thời hạn gói</p>
+          </div>
+
+          <div class="p-2 rounded-xl bg-[#10182a] border border-red-500/20 text-center">
+            <div class="w-6 h-6 mx-auto rounded-lg bg-red-500/15 text-red-400 flex items-center justify-center mb-1">
+              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192l-3.536 3.536M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-5 0a4 4 0 11-8 0 4 4 0 018 0z" />
+              </svg>
+            </div>
+            <p class="text-[10.5px] font-bold text-white leading-tight">Hỗ trợ 24/7</p>
+            <p class="text-[9.5px] text-slate-400 mt-0.5 leading-tight">Zalo 0394602830</p>
+          </div>
+        </div>
+
+        <!-- Danh sách gói thời hạn / phiên bản (Tuyệt đối không hiển thị số lượng gói hay số lượng tồn kho) -->
+        <div>
+          <div class="mb-2">
+            <span class="text-[10.5px] font-extrabold uppercase tracking-wider text-cyan-300">
+              CHỌN GÓI THỜI HẠN / PHIÊN BẢN
+            </span>
+          </div>
+          <div id="modalVariantsList" class="space-y-2">
+            <!-- Render động các thẻ gói -->
+          </div>
+        </div>
+      </div>
+
+      <!-- 3. PINNED FOOTER (LUÔN HIỂN THỊ 100% TRÊN THANH CÔNG CỤ TRÌNH DUYỆT) -->
+      <div class="cyber-modal-footer px-3.5 py-3 border-t border-slate-800 bg-[#080d17] flex items-center justify-between gap-2.5">
+        <div class="min-w-0 flex-1">
+          <p class="text-[11px] text-slate-300 truncate font-medium" id="modalSelectedName">Đang chọn gói</p>
+          <div class="flex items-baseline gap-1.5 mt-0.5">
+            <span id="modalSelectedPrice" class="text-base sm:text-lg font-black text-[#ff4252]">0đ</span>
+            <span id="modalSelectedOrigPrice" class="hidden text-[11px] text-slate-500 line-through">0đ</span>
+          </div>
+        </div>
+
+        <button
+          id="modalBuyBtn"
+          type="button"
+          onclick="buySelectedVariant()"
+          class="px-4 sm:px-5 py-2.5 rounded-full btn-neon-red text-white font-extrabold text-xs sm:text-sm shrink-0 flex items-center gap-1.5 active:scale-95"
+        >
+          <span>Mua ngay</span>
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.4" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+          </svg>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== MODAL QUY ĐỊNH & BẢO HÀNH (100dvh SAFE CENTERED) ==================== -->
+  <div
+    id="policyModal"
+    class="cyber-modal-overlay hidden"
+    onclick="closeModalOnBackdrop(event, 'policyModal')"
+    role="dialog"
+    aria-modal="true"
+  >
+    <div class="cyber-modal-card animate-pop border border-cyan-500/45 shadow-[0_0_45px_rgba(34,211,238,0.18)]">
+      <div class="cyber-modal-header flex items-center justify-between px-4 py-3 border-b border-slate-800 bg-[#080d17]">
+        <div class="flex items-center gap-2">
+          <span class="w-2 h-2 rounded-full bg-cyan-400 shadow-[0_0_8px_#22d3ee]"></span>
+          <h3 class="text-sm sm:text-base font-extrabold text-white">Quy Định &amp; Chính Sách Bảo Hành</h3>
+        </div>
+        <button
+          type="button"
+          onclick="closeModal('policyModal')"
+          class="w-8 h-8 rounded-full bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white flex items-center justify-center transition"
+          aria-label="Đóng"
+        >
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.4" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+      </div>
+
+      <div class="cyber-modal-body custom-scroll p-4 space-y-2.5 text-xs text-slate-300 leading-relaxed">
+        <div class="p-3 rounded-xl bg-[#10182a] border border-emerald-500/25">
+          <p class="font-bold text-emerald-400 mb-1">1. Chế độ bảo hành ký hiệu trên gói</p>
+          <ul class="space-y-1 text-slate-300">
+            <li>• <strong class="text-white">BHF (Bảo hành Full):</strong> Bảo hành 1 đổi 1 hoặc khắc phục trong suốt toàn bộ thời hạn gói đã mua.</li>
+            <li>• <strong class="text-white">BH24H / BH5H:</strong> Bảo hành lỗi đăng nhập hoặc kích hoạt trong 24 giờ / 5 giờ đầu kể từ lúc giao.</li>
+            <li>• <strong class="text-white">KBH (Không bảo hành):</strong> Giá ưu đãi xả kho, chỉ hỗ trợ kiểm tra đăng nhập thành công lúc giao.</li>
+          </ul>
+        </div>
+
+        <div class="p-3 rounded-xl bg-[#10182a] border border-cyan-500/25">
+          <p class="font-bold text-cyan-300 mb-1">2. Quy định sử dụng tài khoản</p>
+          <ul class="space-y-1 text-slate-300">
+            <li>• Đối với tài khoản cấp sẵn hoặc dùng chung: Vui lòng <strong class="text-amber-300">không tự ý đổi mật khẩu, email khôi phục</strong> hoặc chia sẻ cho thiết bị ngoài quy định.</li>
+            <li>• Đối với gói nâng cấp chính chủ: Khách hàng cung cấp đúng email/tài khoản cần nâng cấp qua Zalo <strong class="text-white">0394602830</strong>.</li>
+          </ul>
+        </div>
+
+        <div class="p-3 rounded-xl bg-[#10182a] border border-red-500/25">
+          <p class="font-bold text-red-400 mb-1">3. Thời gian giao hàng &amp; Hỗ trợ</p>
+          <p>Shop xử lý đơn siêu tốc từ 8h00 – 23h30 hàng ngày. Mọi thắc mắc nhắn trực tiếp Zalo <strong class="text-white">0394602830</strong> (Duck Huỳnh) để được hỗ trợ ngay.</p>
+        </div>
+      </div>
+
+      <div class="cyber-modal-footer px-4 py-3 border-t border-slate-800 bg-[#080d17] flex justify-end gap-2">
+        <button
+          type="button"
+          onclick="closeModal('policyModal'); openZaloModal();"
+          class="px-4 py-2 rounded-full btn-neon-red text-white text-xs font-extrabold"
+        >
+          Nhắn Zalo hỗ trợ
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== MODAL LIÊN HỆ ZALO & MÃ QR (100dvh SAFE CENTERED) ==================== -->
+  <div
+    id="zaloModal"
+    class="cyber-modal-overlay hidden"
+    onclick="closeModalOnBackdrop(event, 'zaloModal')"
+    role="dialog"
+    aria-modal="true"
+  >
+    <div class="cyber-modal-card animate-pop max-w-sm border border-red-500/50 shadow-[0_0_45px_rgba(239,68,68,0.25)]">
+      <div class="cyber-modal-header flex items-center justify-between px-4 py-3 border-b border-slate-800 bg-[#080d17]">
+        <h3 class="text-sm sm:text-base font-extrabold text-white">Duck Huỳnh — Liên Hệ Zalo</h3>
+        <button
+          type="button"
+          onclick="closeModal('zaloModal')"
+          class="w-8 h-8 rounded-full bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white flex items-center justify-center transition"
+          aria-label="Đóng"
+        >
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.4" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+      </div>
+
+      <div class="cyber-modal-body custom-scroll p-4 text-center">
+        <p class="text-xs text-slate-400">Quét mã QR hoặc bấm nút bên dưới để nhắn đơn hàng</p>
+
+        <div class="my-3.5 p-2.5 rounded-2xl bg-white inline-block shadow-[0_0_25px_rgba(34,211,238,0.2)]">
+          <img
+            src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&margin=4&data=https://zalo.me/0394602830"
+            alt="Mã QR Zalo Duckhuynh 0394602830"
+            class="w-40 h-40 object-contain mx-auto"
+            onerror="this.style.display='none'; document.getElementById('qrFallbackBox').classList.remove('hidden');"
+          />
+          <div id="qrFallbackBox" class="hidden w-40 h-40 flex flex-col items-center justify-center text-slate-900">
+            <span class="text-sm font-black">ZALO: 0394602830</span>
+            <span class="text-xs text-slate-600 mt-1">Duck Huỳnh</span>
+          </div>
+        </div>
+
+        <div class="flex items-center justify-between gap-2 px-3.5 py-2.5 rounded-2xl bg-[#11192b] border border-slate-700/80">
+          <div class="text-left">
+            <span class="block text-[10px] text-slate-400">Số điện thoại Zalo</span>
+            <span class="text-sm font-black text-cyan-300 tracking-wide">0394602830</span>
+          </div>
+          <button
+            type="button"
+            onclick="copyPhoneNumber()"
+            class="px-3 py-1.5 rounded-full bg-cyan-500/15 hover:bg-cyan-500/25 text-cyan-300 border border-cyan-500/35 text-xs font-bold transition active:scale-95"
+          >
+            Copy SĐT
+          </button>
+        </div>
+      </div>
+
+      <div class="cyber-modal-footer p-3.5 border-t border-slate-800 bg-[#080d17]">
+        <a
+          href="https://zalo.me/0394602830"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="w-full py-2.5 rounded-full btn-neon-red text-white font-extrabold text-xs sm:text-sm flex items-center justify-center gap-2"
+        >
+          <span>Mở Zalo Chat Ngay</span>
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+          </svg>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== TOAST THÔNG BÁO COPY ĐƠN HÀNG & CHUYỂN ZALO ==================== -->
+  <div
+    id="orderToast"
+    class="hidden fixed left-3 right-3 sm:left-auto sm:right-5 sm:max-w-md z-50 animate-pop"
+    style="bottom: calc(14px + env(safe-area-inset-bottom, 0px));"
+  >
+    <div class="p-3.5 rounded-2xl bg-[#0d1526]/95 backdrop-blur-xl border border-cyan-400/75 shadow-[0_10px_35px_rgba(0,0,0,0.88),0_0_20px_rgba(34,211,238,0.22)]">
+      <div class="flex items-start gap-2.5">
+        <div class="w-7 h-7 rounded-full bg-emerald-500/20 text-emerald-400 border border-emerald-500/40 flex items-center justify-center shrink-0 mt-0.5">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.6" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+          </svg>
+        </div>
+        <div class="flex-1 min-w-0">
+          <p class="text-xs font-extrabold text-white">Đã sao chép đơn hàng! Đang chuyển sang Zalo 0394602830...</p>
+          <p id="toastOrderText" class="text-[11px] text-cyan-300 mt-0.5 break-words font-medium">
+            "Shop ơi mik muốn mua..."
+          </p>
+          <div class="mt-2 flex items-center gap-2 flex-wrap">
+            <a
+              href="https://zalo.me/0394602830"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="px-3.5 py-1.5 rounded-full btn-neon-red text-white text-[11px] font-extrabold inline-flex items-center gap-1"
+            >
+              <span>Mở Zalo 0394602830</span>
+              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2.4" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+              </svg>
+            </a>
+            <button
+              type="button"
+              onclick="openZaloModal(); hideToast();"
+              class="px-2.5 py-1.5 rounded-full bg-slate-800 hover:bg-slate-700 text-cyan-300 text-[11px] font-semibold"
+            >
+              Hiện QR
+            </button>
+            <button
+              type="button"
+              onclick="hideToast()"
+              class="px-2.5 py-1.5 rounded-full bg-slate-800/70 hover:bg-slate-700 text-slate-400 text-[11px]"
+            >
+              Đóng
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== JAVASCRIPT LOGIC, ARTWORK 3D NEON & GOOGLE SHEETS SYNC ==================== -->
+  <script>
+    const ZALO_PHONE = '0394602830';
+    const ZALO_URL = 'https://zalo.me/0394602830';
+    const SHEET_GVIZ_JSON_URL = 'https://docs.google.com/spreadsheets/d/1rHDwtvIdgXwfjzUrqnDhuf57olwr2w20qJ9f0yy76qg/gviz/tq?tqx=out:json&sheet=BangGia';
+
+    // Nền bảng mạch điện tử 3D Cyber Neon
+    function getCyberCircuitBackdrop(uid, primaryColor, secondaryColor = '#22f0ff') {
+      return `
+        <defs>
+          <radialGradient id="bgGlow_${uid}" cx="50%" cy="46%" r="58%">
+            <stop offset="0%" stop-color="${primaryColor}" stop-opacity="0.34" />
+            <stop offset="50%" stop-color="${secondaryColor}" stop-opacity="0.1" />
+            <stop offset="100%" stop-color="#050811" stop-opacity="1" />
+          </radialGradient>
+          <linearGradient id="floorGrid_${uid}" x1="0" y1="68" x2="0" y2="120" gradientUnits="userSpaceOnUse">
+            <stop offset="0%" stop-color="${primaryColor}" stop-opacity="0.0" />
+            <stop offset="100%" stop-color="${primaryColor}" stop-opacity="0.22" />
+          </linearGradient>
+          <filter id="neonGlow_${uid}" x="-35%" y="-35%" width="170%" height="170%">
+            <feGaussianBlur stdDeviation="3.4" result="blur1" />
+            <feGaussianBlur stdDeviation="7" result="blur2" />
+            <feMerge>
+              <feMergeNode in="blur2" />
+              <feMergeNode in="blur1" />
+              <feMergeNode in="SourceGraphic" />
+            </feMerge>
+          </filter>
+        </defs>
+        <rect width="160" height="120" fill="#050811" />
+        <rect width="160" height="120" fill="url(#bgGlow_${uid})" />
+        <rect y="68" width="160" height="52" fill="url(#floorGrid_${uid})" />
+        <g stroke="${primaryColor}" stroke-opacity="0.28" stroke-width="1" fill="none">
+          <path d="M0 22 H28 L40 34 H62" />
+          <path d="M160 22 H132 L120 34 H98" />
+          <path d="M0 96 H34 L48 82 H68" />
+          <path d="M160 96 H126 L112 82 H92" />
+          <path d="M16 0 V26 L28 38" />
+          <path d="M144 0 V26 L132 38" />
+          <line x1="0" y1="106" x2="160" y2="106" stroke-opacity="0.18" />
+          <line x1="20" y1="88" x2="140" y2="88" stroke-opacity="0.14" />
+          <line x1="80" y1="78" x2="80" y2="120" stroke-opacity="0.2" />
+          <line x1="58" y1="82" x2="26" y2="120" stroke-opacity="0.16" />
+          <line x1="102" y1="82" x2="134" y2="120" stroke-opacity="0.16" />
+        </g>
+        <g fill="${secondaryColor}">
+          <circle cx="28" cy="22" r="1.8" fill-opacity="0.65" />
+          <circle cx="132" cy="22" r="1.8" fill-opacity="0.65" />
+          <circle cx="34" cy="96" r="1.8" fill-opacity="0.65" />
+          <circle cx="126" cy="96" r="1.8" fill-opacity="0.65" />
+          <circle cx="24" cy="54" r="1.3" fill-opacity="0.5" />
+          <circle cx="138" cy="52" r="1.4" fill-opacity="0.5" />
+        </g>
+      `;
+    }
+
+    // Bộ Artwork SVG 3D Cyber Neon cho toàn bộ 13 sản phẩm
+    let artCounter = 0;
+    function getProductArtworkSVG(productName) {
+      artCounter += 1;
+      const uid = artCounter;
+      const key = (productName || '').toLowerCase();
+
+      if (key.includes('gemini')) {
+        return `
+          <svg viewBox="0 0 160 120" class="w-full h-full object-cover" preserveAspectRatio="xMidYMid slice">
+            ${getCyberCircuitBackdrop(uid, '#6366f1', '#22f0ff')}
+            <defs>
+              <linearGradient id="gemOuter_${uid}" x1="36" y1="16" x2="124" y2="104" gradientUnits="userSpaceOnUse">
+                <stop offset="0%" stop-color="#38bdf8" />
+                <stop offset="50%" stop-color="#818cf8" />
+                <stop offset="100%" stop-color="#e879f9" />
+              </linearGradient>
+              <linearGradient id="gemInner_${uid}" x1="52" y1="30" x2="108" y2="90" gradientUnits="userSpaceOnUse">
+                <stop offset="0%" stop-color="#e0f2fe" />
+                <stop offset="45%" stop-color="#60a5fa" />
+                <stop offset="100%" stop-color="#c084fc" />
+              </linearGradient>
+            </defs>
+            <ellipse cx="80" cy="96" rx="36" ry="6" fill="#38bdf8" fill-opacity="0.24" filter="url(#neonGlow_${uid})" />
+            <g transform="translate(80, 58) rotate(-8)">
+              <path d="M0 -42 C4 -13 13 -4 42 0 C13 4 4 13 0 42 C-4 13 -13 4 -42 0 C-13 -4 -4 -13 0 -42 Z"
+                    fill="url(#gemOuter_${uid})" fill-opacity="0.28" filter="url(#neonGlow_${uid})" />
+              <path d="M0 -38 C3.5 -11.5 11.5 -3.5 38 0 C11.5 3.5 3.5 11.5 0 38 C-3.5 11.5 -11.5 3.5 -38 0 C-11.5 -3.5 -3.5 -11.5 0 -38 Z"
+                    fill="#101935" stroke="url(#gemOuter_${uid})" stroke-width="3" filter="url(#neonGlow_${uid})" />
+              <path d="M0 -28 C2.4 -8.2 8.2 -2.4 28 0 C8.2 2.4 2.4 8.2 0 28 C-2.4 8.2 -8.2 2.4 -28 0 C-8.2 -2.4 -2.4 -8.2 0 -28 Z"
+                    fill="url(#gemInner_${uid})" fill-opacity="0.35" stroke="#e0f2fe" stroke-width="1.6" />
+              <circle cx="0" cy="0" r="3.5" fill="#ffffff" filter="url(#neonGlow_${uid})" />
+            </g>
+          </svg>`;
+      }
+
+      if (key.includes('chatgpt') || key.includes('gpt')) {
+        return `
+          <svg viewBox="0 0 160 120" class="w-full h-full object-cover" preserveAspectRatio="xMidYMid slice">
+            ${getCyberCircuitBackdrop(uid, '#10b981', '#22f0ff')}
+            <defs>
+              <linearGradient id="gptGrad_${uid}" x1="42" y1="20" x2="118" y2="96" gradientUnits="userSpaceOnUse">
+                <stop offset="0%" stop-color="#67e8f9" />
+                <stop offset="50%" stop-color="#34d399" />
+                <stop offset="100%" stop-color="#10b981" />
+              </linearGradient>
+            </defs>
+            <ellipse cx="80" cy="95" rx="44" ry="8" fill="#10b981" fill-opacity="0.32" filter="url(#neonGlow_${uid})" />
+            <circle cx="80" cy="56" r="34" fill="#07191e" stroke="url(#gptGrad_${uid})" stroke-width="2.8" filter="url(#neonGlow_${uid})" />
+            <circle cx="80" cy="56" r="30" fill="none" stroke="#a7f3d0" stroke-opacity="0.3" stroke-width="1" />
+            <g transform="translate(80, 56) scale(0.92)" stroke="url(#gptGrad_${uid})" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" fill="none" filter="url(#neonGlow_${uid})">
+              <path d="M0 -26 C7.5 -26 13.8 -21 15 -14.2 C21.5 -12.6 25.8 -6.4 24.8 0.2 C29 5.5 28.6 13.2 23.8 18 C21.2 24.2 14.5 27.8 7.8 26.5 C2 30 -5.6 29 -10 23.8 C-16.6 22.5 -21.4 16.8 -21 10 C-25.5 4.8 -25.6 -2.8 -21.2 -8 C-19.2 -14.5 -12.6 -18.4 -5.8 -17.4 C-3.8 -22.6 1.2 -26 0 -26 Z" />
+              <line x1="0" y1="-11.5" x2="12.5" y2="-18.5" />
+              <line x1="10" y1="-5.8" x2="22" y2="1.2" />
+              <line x1="10" y1="5.8" x2="10" y2="20" />
+              <line x1="0" y1="11.5" x2="-12.5" y2="18.5" />
+              <line x1="-10" y1="5.8" x2="-22" y2="-1.2" />
+              <line x1="-10" y1="-5.8" x2="-10" y2="-20" />
+              <polygon points="0,-11.5 10,-5.8 10,5.8 0,11.5 -10,5.8 -10,-5.8" stroke="#d1fae5" stroke-width="2.4" />
+            </g>
+          </svg>`;
+      }
+
+      if (key.includes('youtube')) {
+        return `
+          <svg viewBox="0 0 160 120" class="w-full h-full object-cover" preserveAspectRatio="xMidYMid slice">
+            ${getCyberCircuitBackdrop(uid, '#ff2e4c', '#38bdf8')}
+            <polygon points="22,98 38,84 122,84 138,98" fill="#160a12" stroke="#ff3b4e" stroke-width="1.8" filter="url(#neonGlow_${uid})" />
+            <line x1="36" y1="90" x2="124" y2="90" stroke="#ff3b4e" stroke-opacity="0.5" stroke-width="1.2" stroke-dasharray="4 3" />
+            <rect x="35" y="22" width="90" height="60" rx="8" fill="#0d070c" stroke="#ff3b4e" stroke-width="2.2" filter="url(#neonGlow_${uid})" />
+            <rect x="40" y="27" width="80" height="50" rx="5" fill="#1a0810" stroke="#38bdf8" stroke-opacity="0.35" stroke-width="1" />
+            <rect x="57" y="38" width="46" height="28" rx="8" fill="#2b0710" stroke="#ff2e4c" stroke-width="2.6" filter="url(#neonGlow_${uid})" />
+            <polygon points="75,45 90,52 75,59" fill="#ff4d5e" stroke="#ffffff" stroke-width="0.8" filter="url(#neonGlow_${uid})" />
+          </svg>`;
+      }
+
+      if (key.includes('netflix')) {
+        return `
+          <svg viewBox="0 0 160 120" class="w-full h-full object-cover" preserveAspectRatio="xMidYMid slice">
+            <rect width="160" height="120" fill="#040406" />
+            <defs>
+              <radialGradient id="nfSpotlight_${uid}" cx="50%" cy="50%" r="55%">
+                <stop offset="0%" stop-color="#e50914" stop-opacity="0.22" />
+                <stop offset="100%" stop-color="#040406" stop-opacity="0" />
+              </radialGradient>
+              <filter id="nfGlow_${uid}" x="-20%" y="-20%" width="140%" height="140%">
+                <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#e50914" flood-opacity="0.65" />
+              </filter>
+            </defs>
+            <rect width="160" height="120" fill="url(#nfSpotlight_${uid})" />
+            <text
+              x="80"
+              y="67"
+              text-anchor="middle"
+              fill="#e50914"
+              font-family="Inter, Impact, Arial Black, sans-serif"
+              font-weight="900"
+              font-size="26"
+              letter-spacing="2"
+              filter="url(#nfGlow_${uid})"
+            >NETFLIX</text>
+          </svg>`;
+      }
+
+      if (key.includes('claude')) {
+        return `
+          <svg viewBox="0 0 160 120" class="w-full h-full object-cover" preserveAspectRatio="xMidYMid slice">
+            ${getCyberCircuitBackdrop(uid, '#f97316', '#fbbf24')}
+            <circle cx="80" cy="58" r="33" fill="#180e07" stroke="#fb923c" stroke-width="2.2" filter="url(#neonGlow_${uid})" />
+            <g transform="translate(80, 58)" stroke="#fdba74" stroke-width="3.8" stroke-linecap="round" filter="url(#neonGlow_${uid})">
+              <line x1="0" y1="-24" x2="0" y2="-8" />
+              <line x1="0" y1="8" x2="0" y2="24" />
+              <line x1="-24" y1="0" x2="-8" y2="0" />
+              <line x1="8" y1="0" x2="24" y2="0" />
+              <line x1="-17" y1="-17" x2="-5.8" y2="-5.8" />
+              <line x1="5.8" y1="5.8" x2="17" y2="17" />
+              <line x1="17" y1="-17" x2="5.8" y2="-5.8" />
+              <line x1="-5.8" y1="5.8" x2="-17" y2="17" />
+              <line x1="-9.2" y1="-22" x2="-3.2" y2="-7.5" stroke-width="2.6" />
+              <line x1="3.2" y1="7.5" x2="9.2" y2="22" stroke-width="2.6" />
+              <line x1="22" y1="-9.2" x2="7.5" y2="-3.2" stroke-width="2.6" />
+              <line x1="-7.5" y1="3.2" x2="-22" y2="9.2" stroke-width="2.6" />
+            </g>
+            <circle cx="80" cy="58" r="5" fill="#fff7ed" filter="url(#neonGlow_${uid})" />
+          </svg>`;
+      }
+
+      if (key.includes('grok')) {
+        return `
+          <svg viewBox="0 0 160 120" class="w-full h-full object-cover" preserveAspectRatio="xMidYMid slice">
+            ${getCyberCircuitBackdrop(uid, '#38bdf8', '#f8fafc')}
+            <g transform="translate(80, 58)" filter="url(#neonGlow_${uid})">
+              <circle cx="0" cy="0" r="25" fill="#070d19" stroke="#f8fafc" stroke-width="4.2" />
+              <ellipse cx="0" cy="0" rx="37" ry="11" transform="rotate(-32)" fill="none" stroke="#22f0ff" stroke-width="2.4" />
+              <line x1="-26" y1="26" x2="26" y2="-26" stroke="#22f0ff" stroke-width="5" stroke-linecap="round" />
+            </g>
+          </svg>`;
+      }
+
+      if (key.includes('locket')) {
+        return `
+          <svg viewBox="0 0 160 120" class="w-full h-full object-cover" preserveAspectRatio="xMidYMid slice">
+            ${getCyberCircuitBackdrop(uid, '#f59e0b', '#fef08a')}
+            <defs>
+              <linearGradient id="locketGold_${uid}" x1="48" y1="24" x2="112" y2="92" gradientUnits="userSpaceOnUse">
+                <stop offset="0%" stop-color="#fef9c3" />
+                <stop offset="45%" stop-color="#facc15" />
+                <stop offset="100%" stop-color="#d97706" />
+              </linearGradient>
+            </defs>
+            <rect x="46" y="24" width="68" height="68" rx="18" fill="#171105" stroke="url(#locketGold_${uid})" stroke-width="2.8" filter="url(#neonGlow_${uid})" />
+            <path d="M80 78 C80 78 57 63.5 57 49 C57 42.2 62.2 37.5 68.5 37.5 C72.8 37.5 76.8 39.8 80 43.5 C83.2 39.8 87.2 37.5 91.5 37.5 C97.8 37.5 103 42.2 103 49 C103 63.5 80 78 80 78 Z"
+                  fill="url(#locketGold_${uid})" filter="url(#neonGlow_${uid})" />
+          </svg>`;
+      }
+
+      if (key.includes('spotify')) {
+        return `
+          <svg viewBox="0 0 160 120" class="w-full h-full object-cover" preserveAspectRatio="xMidYMid slice">
+            ${getCyberCircuitBackdrop(uid, '#1ed760', '#4ade80')}
+            <g transform="translate(80, 58)" filter="url(#neonGlow_${uid})">
+              <circle cx="0" cy="0" r="32" fill="#071910" stroke="#1ed760" stroke-width="3" />
+              <path d="M-16 -7 C-4 -11 10 -10 19 -4" stroke="#1ed760" stroke-width="4.2" stroke-linecap="round" fill="none" />
+              <path d="M-13 2 C-3 -1 8 0 16 5" stroke="#4ade80" stroke-width="3.6" stroke-linecap="round" fill="none" />
+              <path d="M-10 10 C-2 8 6 9 12 13" stroke="#bbf7d0" stroke-width="3" stroke-linecap="round" fill="none" />
+            </g>
+          </svg>`;
+      }
+
+      if (key.includes('duolingo')) {
+        return `
+          <svg viewBox="0 0 160 120" class="w-full h-full object-cover" preserveAspectRatio="xMidYMid slice">
+            ${getCyberCircuitBackdrop(uid, '#58cc02', '#22f0ff')}
+            <defs>
+              <linearGradient id="duoSuper_${uid}" x1="45" y1="24" x2="115" y2="92" gradientUnits="userSpaceOnUse">
+                <stop offset="0%" stop-color="#4ade80" />
+                <stop offset="50%" stop-color="#22f0ff" />
+                <stop offset="100%" stop-color="#a855f7" />
+              </linearGradient>
+            </defs>
+            <rect x="46" y="24" width="68" height="68" rx="18" fill="#091912" stroke="url(#duoSuper_${uid})" stroke-width="3" filter="url(#neonGlow_${uid})" />
+            <circle cx="68" cy="57" r="9.5" fill="#ffffff" />
+            <circle cx="92" cy="57" r="9.5" fill="#ffffff" />
+            <circle cx="70" cy="57" r="4.5" fill="#06090f" />
+            <circle cx="90" cy="57" r="4.5" fill="#06090f" />
+            <circle cx="71.5" cy="55" r="1.6" fill="#ffffff" />
+            <circle cx="91.5" cy="55" r="1.6" fill="#ffffff" />
+            <polygon points="75,67 85,67 80,75" fill="#facc15" />
+          </svg>`;
+      }
+
+      if (key.includes('canva')) {
+        return `
+          <svg viewBox="0 0 160 120" class="w-full h-full object-cover" preserveAspectRatio="xMidYMid slice">
+            ${getCyberCircuitBackdrop(uid, '#06b6d4', '#a855f7')}
+            <defs>
+              <linearGradient id="canvaRing_${uid}" x1="44" y1="22" x2="116" y2="94" gradientUnits="userSpaceOnUse">
+                <stop offset="0%" stop-color="#22f0ff" />
+                <stop offset="50%" stop-color="#3b82f6" />
+                <stop offset="100%" stop-color="#c084fc" />
+              </linearGradient>
+            </defs>
+            <circle cx="80" cy="58" r="33" fill="#0a1326" stroke="url(#canvaRing_${uid})" stroke-width="3.2" filter="url(#neonGlow_${uid})" />
+            <path d="M93 44 C89.5 40 84.5 38 79 38 C68 38 59.5 46.8 59.5 58 C59.5 69.2 68 78 79 78 C85.5 78 90.5 75.5 94 71"
+                  fill="none" stroke="#ffffff" stroke-width="6" stroke-linecap="round" filter="url(#neonGlow_${uid})" />
+          </svg>`;
+      }
+
+      if (key.includes('notion')) {
+        return `
+          <svg viewBox="0 0 160 120" class="w-full h-full object-cover" preserveAspectRatio="xMidYMid slice">
+            ${getCyberCircuitBackdrop(uid, '#38bdf8', '#e2e8f0')}
+            <g filter="url(#neonGlow_${uid})">
+              <polygon points="54,26 108,22 114,30 114,90 58,94 50,86" fill="#0b1322" stroke="#f8fafc" stroke-width="2.5" />
+              <line x1="50" y1="32" x2="108" y2="28" stroke="#22f0ff" stroke-width="2" />
+              <path d="M68 76 V42 H75 L91 67 V42 H98 V76 H91 L75 51 V76 H68 Z" fill="#ffffff" />
+            </g>
+          </svg>`;
+      }
+
+      if (key.includes('capcut')) {
+        return `
+          <svg viewBox="0 0 160 120" class="w-full h-full object-cover" preserveAspectRatio="xMidYMid slice">
+            ${getCyberCircuitBackdrop(uid, '#22f0ff', '#38bdf8')}
+            <rect x="46" y="24" width="68" height="68" rx="18" fill="#071220" stroke="#22f0ff" stroke-width="2.6" filter="url(#neonGlow_${uid})" />
+            <g stroke-width="4.8" stroke-linecap="round" filter="url(#neonGlow_${uid})">
+              <path d="M60 42 L100 74" stroke="#ffffff" />
+              <path d="M100 42 L60 74" stroke="#ffffff" />
+              <path d="M60 42 H74 M100 42 H86 M60 74 H74 M100 74 H86" stroke="#22f0ff" />
+            </g>
+          </svg>`;
+      }
+
+      return `
+        <svg viewBox="0 0 160 120" class="w-full h-full object-cover" preserveAspectRatio="xMidYMid slice">
+          ${getCyberCircuitBackdrop(uid, '#ff3b4e', '#22f0ff')}
+          <g transform="translate(80, 58)" filter="url(#neonGlow_${uid})">
+            <path d="M0 -32 L26 -22 V-2 C26 15 15 26 0 32 C-15 26 -26 15 -26 -2 V-22 L0 -32 Z" fill="#120914" stroke="#ff3b4e" stroke-width="2.6" />
+            <circle cx="-7" cy="5" r="8.5" fill="none" stroke="#22f0ff" stroke-width="3.2" />
+            <path d="M-1 -1 L13 -15 M8 -10 L13 -5 M4 -6 L9 -1" stroke="#22f0ff" stroke-width="3.2" stroke-linecap="round" />
+          </g>
+        </svg>`;
+    }
+
+    // Dữ liệu đầy đủ 13 sản phẩm / 47 gói làm fallback liền mạch
+    const DEFAULT_PRODUCTS = [
+      {
+        id: 'gemini-pro-12m',
+        category: 'Tài khoản AI',
+        name: 'GEMINI PRO 12 THÁNG',
+        badge: 'PHỔ BIẾN',
+        description: 'Tài khoản Gemini Pro chính hãng sử dụng mô hình AI mạnh mẽ nhất của Google và bộ công cụ Workspace thông minh.',
+        commit1Title: 'Giao tự động',
+        commit1Sub: 'Sau 3 - 5 giây',
+        variants: [
+          { name: 'Gói 12 tháng (BHF)', price: 350000, originalPrice: null, inStock: true }
+        ]
+      },
+      {
+        id: 'chatgpt-plus',
+        category: 'Tài khoản AI',
+        name: 'ChatGPT Plus',
+        badge: '',
+        description: 'Tài khoản ChatGPT Plus sử dụng mô hình GPT-5 / GPT-4o, DALL-E 3, Canvas và Voice Mode siêu mượt.',
+        commit1Title: 'Giao tự động',
+        commit1Sub: 'Sau 3 - 5 giây',
+        variants: [
+          { name: 'Plus 1 tháng · Xài chung 5–10 người (BHF)', price: 55000, originalPrice: null, inStock: false },
+          { name: 'Plus 3 tháng · Xài chung 5–10 người (BHF)', price: 150000, originalPrice: null, inStock: true },
+          { name: 'Plus 1 tháng · Xài chung 2–4 người (BHF)', price: 130000, originalPrice: null, inStock: true },
+          { name: 'Plus 3 tháng · Xài chung 2–4 người (BHF)', price: 250000, originalPrice: null, inStock: true },
+          { name: 'Plus 1 tháng · Xài riêng (BHF)', price: 325000, originalPrice: null, inStock: true },
+          { name: 'Plus 2 tháng · Xài riêng (BHF)', price: 625000, originalPrice: null, inStock: true },
+          { name: 'ChatGPT UPI 1 tháng · Xài riêng (BH5H)', price: 170000, originalPrice: null, inStock: true },
+          { name: 'ChatGPT K12 1 tháng · Xài riêng (BHF)', price: 350000, originalPrice: null, inStock: true },
+          { name: 'Plus 4 tháng · Xài riêng (BHF)', price: 1455000, originalPrice: null, inStock: true }
+        ]
+      },
+      {
+        id: 'api-claude',
+        category: 'Tài khoản AI',
+        name: 'API Claude',
+        badge: 'GIÁ RẺ',
+        description: 'API Claude chính hãng tốc độ cao, ổn định cho lập trình, viết lách và tự động hóa workflow.',
+        commit1Title: 'Giao tự động',
+        commit1Sub: 'Sau 3 - 5 giây',
+        variants: [
+          { name: '500M token · 14 ngày (BHF)', price: 545000, originalPrice: null, inStock: false },
+          { name: '100M token · 5 ngày (BHF)', price: 149000, originalPrice: null, inStock: false },
+          { name: '50M token · 3 ngày (BHF)', price: 89000, originalPrice: null, inStock: false },
+          { name: '10M token · 1 ngày (BHF)', price: 55000, originalPrice: null, inStock: false }
+        ]
+      },
+      {
+        id: 'grok-ai',
+        category: 'Tài khoản AI',
+        name: 'Grok',
+        badge: '',
+        description: 'Tài khoản Grok AI xAI đi kèm tích xanh X Premium, trả lời thời gian thực không kiểm duyệt.',
+        commit1Title: 'Giao tự động',
+        commit1Sub: 'Sau 3 - 5 giây',
+        variants: [
+          { name: 'Premium 4x · 7–10 ngày (BHF)', price: 155000, originalPrice: null, inStock: false },
+          { name: 'Premium 4x · 13–14 ngày (KBH)', price: 145000, originalPrice: null, inStock: false },
+          { name: 'Premium 4x · 13–14 ngày (BHF)', price: 265000, originalPrice: null, inStock: false },
+          { name: 'Grok Plus 1 tháng (KBH)', price: 225000, originalPrice: null, inStock: false }
+        ]
+      },
+      {
+        id: 'youtube-premium',
+        category: 'Giải trí',
+        name: 'YouTube Premium',
+        badge: '',
+        description: 'YouTube Premium chính chủ xem video không quảng cáo, phát nhạc nền tắt màn hình kèm YouTube Music.',
+        commit1Title: 'Xử lý lời mời',
+        commit1Sub: 'Thông báo khi hoàn tất',
+        variants: [
+          { name: 'Gói 1 tháng (BHF)', price: 55000, originalPrice: null, inStock: true },
+          { name: 'Gói 3 tháng (BHF)', price: 155000, originalPrice: null, inStock: true },
+          { name: 'Gói 6 tháng (BHF)', price: 265000, originalPrice: null, inStock: true },
+          { name: 'Gói 12 tháng (BHF)', price: 399000, originalPrice: null, inStock: true },
+          { name: 'Link Offer 3 tháng (BH24H)', price: 135000, originalPrice: null, inStock: true }
+        ]
+      },
+      {
+        id: 'locket-gold',
+        category: 'Giải trí',
+        name: 'Locket Gold For Iphone',
+        badge: '',
+        description: 'Nâng cấp Locket Gold cho iPhone mở khóa huy hiệu vàng, đăng ảnh từ thư viện, không giới hạn bạn bè.',
+        commit1Title: 'Giao tự động',
+        commit1Sub: 'Sau 3 - 5 giây',
+        variants: [
+          { name: 'Locket Gold 6 tháng (BHF)', price: 79000, originalPrice: null, inStock: true },
+          { name: 'Locket Gold 12 tháng (BHF)', price: 99000, originalPrice: null, inStock: true }
+        ]
+      },
+      {
+        id: 'netflix-premium',
+        category: 'Giải trí',
+        name: 'Netflix Premium',
+        badge: '',
+        description: 'Tài khoản Netflix Premium 4K Ultra HD + HDR, xem mượt trên TV, điện thoại, máy tính bảng.',
+        commit1Title: 'Giao tự động',
+        commit1Sub: 'Sau 3 - 5 giây',
+        variants: [
+          { name: 'Gói 1 tháng (BHF)', price: 99000, originalPrice: null, inStock: true }
+        ]
+      },
+      {
+        id: 'spotify-premium',
+        category: 'Giải trí',
+        name: 'Spotify Premium',
+        badge: '',
+        description: 'Nâng cấp Spotify Premium nghe nhạc chất lượng cao không quảng cáo, tải nhạc nghe offline không giới hạn.',
+        commit1Title: 'Giao tự động',
+        commit1Sub: 'Sau 3 - 5 giây',
+        variants: [
+          { name: 'Gói 1 tháng (BHF)', price: 59000, originalPrice: null, inStock: true }
+        ]
+      },
+      {
+        id: 'super-duolingo',
+        category: 'Giải trí',
+        name: 'Super Duolingo',
+        badge: '',
+        description: 'Nâng cấp Super Duolingo học ngoại ngữ không giới hạn trái tim, không quảng cáo, ôn tập lỗi sai thông minh.',
+        commit1Title: 'Giao tự động',
+        commit1Sub: 'Sau 3 - 5 giây',
+        variants: [
+          { name: 'Link Offer Super Duolingo 2 tháng (BHF)', price: 50000, originalPrice: null, inStock: true },
+          { name: 'Link Offer Super Duolingo 12 tháng (KBH)', price: 110000, originalPrice: null, inStock: false },
+          { name: 'Gói 7 ngày (BHF)', price: 29000, originalPrice: null, inStock: false },
+          { name: 'Gói 1 tháng (BHF)', price: 50000, originalPrice: null, inStock: false },
+          { name: 'Gói 3 tháng (BHF)', price: 80000, originalPrice: null, inStock: false }
+        ]
+      },
+      {
+        id: 'canva-pro',
+        category: 'Tài khoản Pro',
+        name: 'Canva Pro',
+        badge: '',
+        description: 'Nâng cấp Canva Pro chính chủ không giới hạn kho ảnh, mẫu, công cụ xóa nền và Magic Studio.',
+        commit1Title: 'Giao tự động',
+        commit1Sub: 'Sau 3 - 5 giây',
+        variants: [
+          { name: 'Link Canva Pro 1 tháng (BHF)', price: 30000, originalPrice: null, inStock: true },
+          { name: 'Slot Canva Pro 1 tháng (BHF)', price: 40000, originalPrice: null, inStock: true },
+          { name: 'Slot Canva Edu 2 năm (BHF)', price: 70000, originalPrice: null, inStock: false },
+          { name: 'Slot Canva Pro 1 năm (BHF)', price: 179000, originalPrice: null, inStock: true },
+          { name: 'Slot Canva Edu 1 năm (BHF)', price: 79000, originalPrice: null, inStock: false },
+          { name: 'Admin Canva Business 100 slot · 1 tháng (BHF)', price: 99000, originalPrice: null, inStock: false },
+          { name: 'Admin Family Canva Edu 500 slot · 3 năm (KBH)', price: 129000, originalPrice: null, inStock: false }
+        ]
+      },
+      {
+        id: 'notion-plus',
+        category: 'Tài khoản Pro',
+        name: 'Notion Plus',
+        badge: '',
+        description: 'Nâng cấp Notion Plus Workspace không giới hạn block và upload tệp lớn.',
+        commit1Title: 'Giao tự động',
+        commit1Sub: 'Sau 3 - 5 giây',
+        variants: [
+          { name: '1 Tháng (Nâng cấp chính chủ)', price: 119000, originalPrice: 150000, inStock: true },
+          { name: '1 Năm (Chính chủ)', price: 750000, originalPrice: 1200000, inStock: true }
+        ]
+      },
+      {
+        id: 'capcut-pro',
+        category: 'Tool làm video',
+        name: 'CapCut Pro',
+        badge: '',
+        description: 'Bản quyền CapCut Pro trên PC và Mobile, xuất video 4K 60FPS không logo, hiệu ứng VIP.',
+        commit1Title: 'Giao tự động',
+        commit1Sub: 'Sau 3 - 5 giây',
+        variants: [
+          { name: '1 Tháng (BHF)', price: 79000, originalPrice: null, inStock: true },
+          { name: 'Slot mail chính chủ · 1 tháng (BHF)', price: 89000, originalPrice: null, inStock: true },
+          { name: 'Team 3 tháng (BHF)', price: 199000, originalPrice: null, inStock: true },
+          { name: '6 Tháng (BHF)', price: 359000, originalPrice: null, inStock: true },
+          { name: '1 Năm', price: 480000, originalPrice: 690000, inStock: false }
+        ]
+      },
+      {
+        id: 'tool-and-key',
+        category: 'Tool làm video',
+        name: 'Tool & Key',
+        badge: '',
+        description: 'Cung cấp key bản quyền phần mềm Windows, Office, IDM và các công cụ hỗ trợ công việc chính hãng.',
+        commit1Title: 'Giao tự động',
+        commit1Sub: 'Sau 3 - 5 giây',
+        variants: [
+          { name: 'Gói tiêu chuẩn (BHF)', price: 119000, originalPrice: null, inStock: true }
+        ]
+      }
+    ];
+
+    let state = {
+      products: JSON.parse(JSON.stringify(DEFAULT_PRODUCTS)),
+      activeCategory: 'Tất cả',
+      searchQuery: '',
+      sortBy: 'featured',
+      selectedProductId: null,
+      selectedVariantIndex: 0,
+      toastTimer: null
+    };
+
+    function formatVND(amount) {
+      if (typeof amount !== 'number' || isNaN(amount)) return '0đ';
+      return amount.toLocaleString('vi-VN') + 'đ';
+    }
+
+    function escapeHTML(str) {
+      return String(str || '')
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;');
+    }
+
+    function getProductMetrics(product) {
+      const variants = product.variants || [];
+      const inStockVariants = variants.filter(v => v.inStock);
+      const hasStock = inStockVariants.length > 0;
+      const sourceForPrice = hasStock ? inStockVariants : variants;
+      const minPrice = sourceForPrice.length > 0
+        ? Math.min(...sourceForPrice.map(v => v.price))
+        : 0;
+      return {
+        hasStock,
+        minPrice,
+        isMulti: variants.length > 1,
+        firstAvailableVariant: inStockVariants[0] || variants[0] || null
+      };
+    }
+
+    function renderCategories() {
+      const nav = document.getElementById('categoryNav');
+      const preferredOrder = ['Tài khoản AI', 'Giải trí', 'Tài khoản Pro', 'Tool làm video'];
+      const foundCategories = new Set();
+
+      state.products.forEach(p => {
+        if (p.category && p.category.trim()) {
+          foundCategories.add(p.category.trim());
+        }
+      });
+
+      const orderedCategories = ['Tất cả'];
+      preferredOrder.forEach(cat => {
+        if (foundCategories.has(cat)) {
+          orderedCategories.push(cat);
+          foundCategories.delete(cat);
+        }
+      });
+      foundCategories.forEach(cat => orderedCategories.push(cat));
+
+      if (!orderedCategories.includes(state.activeCategory)) {
+        state.activeCategory = 'Tất cả';
+      }
+
+      nav.innerHTML = orderedCategories.map(cat => {
+        const isActive = state.activeCategory === cat;
+        const pillStyle = isActive
+          ? 'bg-red-500/15 text-white border-red-500 shadow-[0_0_12px_rgba(239,68,68,0.5)]'
+          : 'bg-[#0c1322] text-slate-200 border-cyan-500/30 hover:border-cyan-400 hover:text-cyan-200';
+
+        return `
+          <button
+            type="button"
+            onclick="selectCategory('${escapeHTML(cat)}')"
+            class="px-3.5 py-1.5 rounded-full text-[11px] sm:text-xs font-semibold border whitespace-nowrap transition active:scale-95 ${pillStyle}"
+          >
+            ${escapeHTML(cat)}
+          </button>
+        `;
+      }).join('');
+    }
+
+    function getFilteredProducts() {
+      const q = state.searchQuery.trim().toLowerCase();
+
+      let list = state.products.filter(product => {
+        const matchCat = state.activeCategory === 'Tất cả' || product.category === state.activeCategory;
+        if (!matchCat) return false;
+        if (!q) return true;
+
+        const matchName = product.name.toLowerCase().includes(q);
+        const matchCatName = product.category.toLowerCase().includes(q);
+        const matchVariant = (product.variants || []).some(v => v.name.toLowerCase().includes(q));
+        return matchName || matchCatName || matchVariant;
+      });
+
+      if (state.sortBy === 'price-asc') {
+        list.sort((a, b) => getProductMetrics(a).minPrice - getProductMetrics(b).minPrice);
+      } else if (state.sortBy === 'price-desc') {
+        list.sort((a, b) => getProductMetrics(b).minPrice - getProductMetrics(a).minPrice);
+      } else if (state.sortBy === 'in-stock') {
+        list.sort((a, b) => Number(getProductMetrics(b).hasStock) - Number(getProductMetrics(a).hasStock));
+      }
+
+      return list;
+    }
+
+    function renderProducts() {
+      const grid = document.getElementById('productGrid');
+      const emptyState = document.getElementById('emptyState');
+      const summary = document.getElementById('catalogSummary');
+      const filtered = getFilteredProducts();
+
+      summary.textContent = `${filtered.length} sản phẩm bản quyền`;
+
+      if (filtered.length === 0) {
+        grid.innerHTML = '';
+        emptyState.classList.remove('hidden');
+        return;
+      }
+
+      emptyState.classList.add('hidden');
+
+      grid.innerHTML = filtered.map(product => {
+        const { hasStock, minPrice, isMulti } = getProductMetrics(product);
+        const badgeText = (product.badge || '').trim();
+
+        let badgeHTML = '';
+        if (badgeText) {
+          const isCheap = badgeText.toUpperCase().includes('RẺ');
+          const badgeClass = isCheap
+            ? 'bg-[#091e26]/95 text-cyan-300 border-cyan-400/80 shadow-[0_0_10px_rgba(34,240,255,0.45)]'
+            : 'bg-[#2a120a]/95 text-amber-200 border-amber-400/80 shadow-[0_0_12px_rgba(245,158,11,0.5)]';
+          badgeHTML = `
+            <span class="absolute top-2 right-2 px-2 py-0.5 rounded-full text-[9px] font-extrabold uppercase tracking-wider border ${badgeClass}">
+              ${escapeHTML(badgeText)}
+            </span>`;
+        }
+
+        const pricePrefix = isMulti ? '<span class="text-[11px] font-medium text-slate-300">Từ</span> ' : '';
+        const stockHTML = hasStock
+          ? `<span class="block text-[11px] sm:text-xs font-semibold text-[#22c55e]">Còn hàng</span>`
+          : `<span class="block text-[11px] sm:text-xs font-semibold text-slate-400">Hết hàng</span>`;
+
+        const buyBtnHTML = hasStock
+          ? `<button
+               type="button"
+               onclick="handleCardBuy('${escapeHTML(product.id)}')"
+               class="flex-1 py-1.5 sm:py-2 px-2 rounded-full btn-neon-red text-white font-bold text-[11px] sm:text-xs text-center active:scale-95 whitespace-nowrap"
+             >
+               Mua ngay
+             </button>`
+          : `<button
+               type="button"
+               disabled
+               class="flex-1 py-1.5 sm:py-2 px-2 rounded-full bg-slate-800/80 text-slate-400 font-bold text-[11px] sm:text-xs text-center border border-slate-700/70 cursor-not-allowed whitespace-nowrap"
+             >
+               Hết hàng
+             </button>`;
+
+        return `
+          <article class="product-card-neon p-2.5 sm:p-3 flex flex-col justify-between">
+            <div>
+              <div
+                onclick="openProductDetail('${escapeHTML(product.id)}')"
+                class="relative aspect-[4/3] w-full rounded-[12px] overflow-hidden border border-slate-800/90 bg-[#050811] cursor-pointer group"
+              >
+                <div class="w-full h-full transform group-hover:scale-105 transition duration-300">
+                  ${getProductArtworkSVG(product.name)}
+                </div>
+                ${badgeHTML}
+              </div>
+
+              <h2
+                onclick="openProductDetail('${escapeHTML(product.id)}')"
+                class="mt-2.5 text-[13px] sm:text-sm font-extrabold text-white hover:text-cyan-300 transition cursor-pointer line-clamp-1 leading-snug"
+              >
+                ${escapeHTML(product.name)}
+              </h2>
+
+              <div class="mt-1">
+                <div class="text-[13.5px] sm:text-base font-black text-[#ff4252] drop-shadow-[0_0_8px_rgba(255,66,82,0.35)]">
+                  ${pricePrefix}${formatVND(minPrice)}
+                </div>
+                <div class="mt-0.5">
+                  ${stockHTML}
+                </div>
+              </div>
+            </div>
+
+            <div class="mt-2.5 flex items-center gap-1.5">
+              <button
+                type="button"
+                onclick="openProductDetail('${escapeHTML(product.id)}')"
+                class="flex-1 py-1.5 sm:py-2 px-1.5 rounded-full btn-detail-dark text-slate-100 font-semibold text-[10.5px] sm:text-xs text-center active:scale-95 whitespace-nowrap"
+              >
+                Xem chi tiết
+              </button>
+              ${buyBtnHTML}
+            </div>
+          </article>
+        `;
+      }).join('');
+    }
+
+    function handleCardBuy(productId) {
+      const product = state.products.find(p => p.id === productId);
+      if (!product) return;
+
+      const { hasStock, isMulti, firstAvailableVariant } = getProductMetrics(product);
+      if (!hasStock) return;
+
+      if (!isMulti && firstAvailableVariant) {
+        triggerZaloOrder(product.name, firstAvailableVariant.name, firstAvailableVariant.price);
+      } else {
+        openProductDetail(productId);
+      }
+    }
+
+    function openProductDetail(productId) {
+      const product = state.products.find(p => p.id === productId);
+      if (!product) return;
+
+      state.selectedProductId = product.id;
+      const firstAvailableIdx = product.variants.findIndex(v => v.inStock);
+      state.selectedVariantIndex = firstAvailableIdx !== -1 ? firstAvailableIdx : 0;
+
+      document.getElementById('modalArtworkBox').innerHTML = getProductArtworkSVG(product.name);
+      document.getElementById('modalCategory').textContent = product.category;
+      document.getElementById('modalTitle').textContent = product.name;
+      document.getElementById('modalDesc').textContent = product.description;
+      document.getElementById('modalCommit1Title').textContent = product.commit1Title || 'Giao tự động';
+      document.getElementById('modalCommit1Sub').textContent = product.commit1Sub || 'Sau 3 - 5 giây';
+
+      const badgeEl = document.getElementById('modalBadge');
+      if (product.badge && product.badge.trim()) {
+        const isCheap = product.badge.toUpperCase().includes('RẺ');
+        badgeEl.className = `text-[9.5px] font-extrabold uppercase tracking-wider px-2 py-0.5 rounded-full border ${
+          isCheap
+            ? 'bg-cyan-950 text-cyan-300 border-cyan-400'
+            : 'bg-amber-950 text-amber-300 border-amber-400'
+        }`;
+        badgeEl.textContent = product.badge.trim();
+        badgeEl.classList.remove('hidden');
+      } else {
+        badgeEl.classList.add('hidden');
+      }
+
+      renderModalVariants();
+      const modalEl = document.getElementById('detailModal');
+      modalEl.classList.remove('hidden');
+      document.body.style.overflow = 'hidden';
+
+      const scrollBody = modalEl.querySelector('.cyber-modal-body');
+      if (scrollBody) scrollBody.scrollTop = 0;
+    }
+
+    function renderModalVariants() {
+      const product = state.products.find(p => p.id === state.selectedProductId);
+      if (!product) return;
+
+      const listEl = document.getElementById('modalVariantsList');
+
+      listEl.innerHTML = product.variants.map((v, idx) => {
+        const isSelected = idx === state.selectedVariantIndex && v.inStock;
+        const isDisabled = !v.inStock;
+
+        let cardClass = '';
+        if (isDisabled) {
+          cardClass = 'opacity-50 cursor-not-allowed bg-[#080d17] border-slate-800/80';
+        } else if (isSelected) {
+          cardClass = 'cursor-pointer bg-red-950/25 border-[#ff3b4e] shadow-[0_0_16px_rgba(255,59,78,0.25)]';
+        } else {
+          cardClass = 'cursor-pointer bg-[#10182a] border-slate-800 hover:border-cyan-500/40';
+        }
+
+        const statusHTML = v.inStock
+          ? `<span class="text-[11px] font-semibold text-[#22c55e]">Còn hàng</span>`
+          : `<span class="text-[11px] font-semibold text-slate-400">Hết hàng</span>`;
+
+        const origPriceHTML = v.originalPrice && v.originalPrice > v.price
+          ? `<span class="block text-[10.5px] text-slate-500 line-through">${formatVND(v.originalPrice)}</span>`
+          : '';
+
+        return `
+          <div
+            ${isDisabled ? '' : `onclick="selectVariant(${idx})"`}
+            class="px-3 py-2.5 rounded-xl border transition flex items-center justify-between gap-2.5 ${cardClass}"
+          >
+            <div class="flex items-start gap-2.5 min-w-0">
+              <div class="mt-0.5 w-4 h-4 rounded-full border flex items-center justify-center shrink-0 ${
+                isSelected ? 'border-[#ff3b4e] bg-[#ff3b4e]/20' : 'border-slate-600'
+              }">
+                ${isSelected ? '<span class="w-2 h-2 rounded-full bg-[#ff3b4e]"></span>' : ''}
+              </div>
+              <div class="min-w-0">
+                <p class="text-xs sm:text-[13px] font-bold text-white leading-snug break-words">
+                  ${escapeHTML(v.name)}
+                </p>
+                <div class="mt-0.5">${statusHTML}</div>
+              </div>
+            </div>
+
+            <div class="text-right shrink-0">
+              <span class="text-xs sm:text-sm font-black ${isDisabled ? 'text-slate-400' : 'text-[#ff4252]'}">
+                ${formatVND(v.price)}
+              </span>
+              ${origPriceHTML}
+            </div>
+          </div>
+        `;
+      }).join('');
+
+      const activeVariant = product.variants[state.selectedVariantIndex];
+      const buyBtn = document.getElementById('modalBuyBtn');
+
+      if (activeVariant && activeVariant.inStock) {
+        document.getElementById('modalSelectedName').textContent = activeVariant.name;
+        document.getElementById('modalSelectedPrice').textContent = formatVND(activeVariant.price);
+
+        const origEl = document.getElementById('modalSelectedOrigPrice');
+        if (activeVariant.originalPrice && activeVariant.originalPrice > activeVariant.price) {
+          origEl.textContent = formatVND(activeVariant.originalPrice);
+          origEl.classList.remove('hidden');
+        } else {
+          origEl.classList.add('hidden');
+        }
+
+        buyBtn.disabled = false;
+        buyBtn.className = 'px-4 sm:px-5 py-2.5 rounded-full btn-neon-red text-white font-extrabold text-xs sm:text-sm shrink-0 flex items-center gap-1.5 active:scale-95';
+        buyBtn.innerHTML = `
+          <span>Mua ngay</span>
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.4" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+          </svg>
+        `;
+      } else {
+        document.getElementById('modalSelectedName').textContent = activeVariant ? activeVariant.name : 'Tạm hết hàng';
+        document.getElementById('modalSelectedPrice').textContent = activeVariant ? formatVND(activeVariant.price) : 'Hết hàng';
+        document.getElementById('modalSelectedOrigPrice').classList.add('hidden');
+
+        buyBtn.disabled = true;
+        buyBtn.className = 'px-4 sm:px-5 py-2.5 rounded-full bg-slate-800 text-slate-400 font-bold text-xs sm:text-sm cursor-not-allowed shrink-0 border border-slate-700';
+        buyBtn.textContent = 'Hết hàng';
+      }
+    }
+
+    function selectVariant(idx) {
+      const product = state.products.find(p => p.id === state.selectedProductId);
+      if (!product || !product.variants[idx] || !product.variants[idx].inStock) return;
+      state.selectedVariantIndex = idx;
+      renderModalVariants();
+    }
+
+    function buySelectedVariant() {
+      const product = state.products.find(p => p.id === state.selectedProductId);
+      if (!product) return;
+      const variant = product.variants[state.selectedVariantIndex];
+      if (!variant || !variant.inStock) return;
+
+      triggerZaloOrder(product.name, variant.name, variant.price);
+    }
+
+    // Copy tương thích cả Safari mới lẫn iOS WebView (Zalo / Gemini / TikTok)
+    async function copyToClipboard(text) {
+      try {
+        if (navigator.clipboard && window.isSecureContext) {
+          await navigator.clipboard.writeText(text);
+          return true;
+        }
+      } catch (e) {}
+
+      try {
+        const textarea = document.createElement('textarea');
+        textarea.value = text;
+        textarea.setAttribute('readonly', '');
+        textarea.style.position = 'fixed';
+        textarea.style.top = '-9999px';
+        textarea.style.left = '-9999px';
+        document.body.appendChild(textarea);
+        textarea.focus();
+        textarea.select();
+        textarea.setSelectionRange(0, textarea.value.length);
+        const ok = document.execCommand('copy');
+        document.body.removeChild(textarea);
+        return ok;
+      } catch (err) {
+        return false;
+      }
+    }
+
+    function triggerZaloOrder(productName, variantName, price) {
+      const orderMessage = `Shop ơi mik muốn mua ${productName} - ${variantName} (${formatVND(price)})`;
+      copyToClipboard(orderMessage);
+
+      const toast = document.getElementById('orderToast');
+      document.getElementById('toastOrderText').textContent = `"${orderMessage}"`;
+      toast.classList.remove('hidden');
+
+      if (state.toastTimer) clearTimeout(state.toastTimer);
+      state.toastTimer = setTimeout(hideToast, 9000);
+
+      setTimeout(() => {
+        try {
+          const win = window.open(ZALO_URL, '_blank', 'noopener,noreferrer');
+          if (!win) {
+            window.location.href = ZALO_URL;
+          }
+        } catch (e) {
+          window.location.href = ZALO_URL;
+        }
+      }, 300);
+    }
+
+    function hideToast() {
+      document.getElementById('orderToast').classList.add('hidden');
+    }
+
+    function copyPhoneNumber() {
+      copyToClipboard(ZALO_PHONE);
+      const toast = document.getElementById('orderToast');
+      document.getElementById('toastOrderText').textContent = `Đã sao chép số Zalo: ${ZALO_PHONE}`;
+      toast.classList.remove('hidden');
+      if (state.toastTimer) clearTimeout(state.toastTimer);
+      state.toastTimer = setTimeout(hideToast, 5000);
+    }
+
+    function selectCategory(category) {
+      state.activeCategory = category;
+      renderCategories();
+      renderProducts();
+    }
+
+    function handleSearch(val) {
+      state.searchQuery = val;
+      const clearBtn = document.getElementById('clearSearchBtn');
+      if (val.trim()) clearBtn.classList.remove('hidden');
+      else clearBtn.classList.add('hidden');
+      renderProducts();
+    }
+
+    function clearSearch() {
+      const input = document.getElementById('searchInput');
+      input.value = '';
+      handleSearch('');
+      input.focus();
+    }
+
+    function handleSort(val) {
+      state.sortBy = val;
+      renderProducts();
+    }
+
+    function resetFilters() {
+      state.activeCategory = 'Tất cả';
+      state.searchQuery = '';
+      state.sortBy = 'featured';
+      document.getElementById('searchInput').value = '';
+      document.getElementById('sortSelect').value = 'featured';
+      document.getElementById('clearSearchBtn').classList.add('hidden');
+      renderCategories();
+      renderProducts();
+    }
+
+    function openZaloModal() {
+      document.getElementById('zaloModal').classList.remove('hidden');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function openPolicyModal() {
+      document.getElementById('policyModal').classList.remove('hidden');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeModal(modalId) {
+      document.getElementById(modalId).classList.add('hidden');
+      document.body.style.overflow = '';
+    }
+
+    function closeModalOnBackdrop(event, modalId) {
+      if (event.target.id === modalId) {
+        closeModal(modalId);
+      }
+    }
+
+    // ==================== ĐỒNG BỘ GOOGLE SHEETS (GVIZ JSON) ====================
+    function parsePriceNumber(raw) {
+      if (typeof raw === 'number') return Math.round(raw);
+      if (!raw) return 0;
+      const digitsOnly = String(raw).replace(/[^\d]/g, '');
+      return digitsOnly ? parseInt(digitsOnly, 10) : 0;
+    }
+
+    function parseStockStatus(raw) {
+      const normalized = String(raw || '').trim().toLowerCase();
+      if (!normalized) return true;
+      if (normalized.includes('hết') || normalized === 'het' || normalized === '0' || normalized === 'false') {
+        return false;
+      }
+      return true;
+    }
+
+    function normalizeHeaderKey(header) {
+      return String(header || '')
+        .toLowerCase()
+        .normalize('NFD')
+        .replace(/[\u0300-\u036f]/g, '')
+        .replace(/[^a-z0-9]/g, '');
+    }
+
+    function parseGvizJsonResponse(responseText) {
+      const jsonMatch = responseText.match(/google\.visualization\.Query\.setResponse\(([\s\S]*)\);?\s*$/);
+      if (!jsonMatch || !jsonMatch[1]) return null;
+
+      const payload = JSON.parse(jsonMatch[1]);
+      if (!payload || !payload.table || !Array.isArray(payload.table.rows)) return null;
+
+      const cols = (payload.table.cols || []).map(c => c.label || c.id || '');
+      const rawRows = payload.table.rows.map(r =>
+        (r.c || []).map(cell => {
+          if (!cell) return '';
+          if (cell.v !== null && cell.v !== undefined) return cell.v;
+          if (cell.f !== null && cell.f !== undefined) return cell.f;
+          return '';
+        })
+      );
+
+      if (rawRows.length === 0) return null;
+
+      // Xác định hàng tiêu đề cột (nếu gviz chưa tách label thì nằm ở hàng 0)
+      let headerRow = cols;
+      let dataStartIndex = 0;
+      const firstRowNorm = rawRows[0].map(normalizeHeaderKey);
+      if (firstRowNorm.some(h => h.includes('tensanpham') || h.includes('danhmuc') || h.includes('giaban'))) {
+        headerRow = rawRows[0];
+        dataStartIndex = 1;
+      }
+
+      const headers = headerRow.map(normalizeHeaderKey);
+      const colIdx = {
+        category: headers.findIndex(h => h.includes('danhmuc') || h === 'category'),
+        name: headers.findIndex(h => h.includes('tensanpham') || h === 'sanpham' || h === 'name'),
+        badge: headers.findIndex(h => h.includes('nhan') || h === 'badge' || h === 'tag'),
+        desc: headers.findIndex(h => h.includes('mota') || h === 'description'),
+        c1Title: headers.findIndex(h => h.includes('camket1tieude') || h.includes('camket')),
+        c1Sub: headers.findIndex(h => h.includes('camket1mota') || h.includes('thoigiangiao')),
+        variantName: headers.findIndex(h => h.includes('tengoi') || h.includes('goi') || h === 'variant'),
+        price: headers.findIndex(h => h.includes('giaban') || h === 'gia' || h === 'price'),
+        origPrice: headers.findIndex(h => h.includes('giagoc') || h === 'originalprice'),
+        status: headers.findIndex(h => h.includes('trangthai') || h === 'tinhtrang' || h === 'status')
+      };
+
+      if (colIdx.name === -1 || colIdx.price === -1) return null;
+
+      const productMap = new Map();
+
+      for (let i = dataStartIndex; i < rawRows.length; i++) {
+        const row = rawRows[i];
+        const prodName = String(row[colIdx.name] || '').trim();
+        if (!prodName) continue;
+
+        const category = String((colIdx.category !== -1 ? row[colIdx.category] : '') || 'Tài khoản AI').trim();
+        const badge = colIdx.badge !== -1 ? String(row[colIdx.badge] || '').trim() : '';
+        const desc = colIdx.desc !== -1 ? String(row[colIdx.desc] || '').trim() : '';
+        const c1Title = colIdx.c1Title !== -1 ? String(row[colIdx.c1Title] || '').trim() : 'Giao tự động';
+        const c1Sub = colIdx.c1Sub !== -1 ? String(row[colIdx.c1Sub] || '').trim() : 'Sau 3 - 5 giây';
+        const variantName = String((colIdx.variantName !== -1 ? row[colIdx.variantName] : '') || 'Gói tiêu chuẩn (BHF)').trim();
+        const price = parsePriceNumber(row[colIdx.price]);
+        const origPriceRaw = colIdx.origPrice !== -1 ? parsePriceNumber(row[colIdx.origPrice]) : 0;
+        const inStock = colIdx.status !== -1 ? parseStockStatus(row[colIdx.status]) : true;
+
+        if (!productMap.has(prodName)) {
+          const fallbackDefault = DEFAULT_PRODUCTS.find(
+            d => d.name.toLowerCase() === prodName.toLowerCase()
+          );
+
+          productMap.set(prodName, {
+            id: 'sheet-' + productMap.size + '-' + prodName.toLowerCase().replace(/[^a-z0-9]/g, ''),
+            category: category,
+            name: prodName,
+            badge: badge,
+            description: desc || (fallbackDefault ? fallbackDefault.description : `Bản quyền ${prodName} chính hãng, bảo hành trọn thời hạn gói.`),
+            commit1Title: c1Title || 'Giao tự động',
+            commit1Sub: c1Sub || 'Sau 3 - 5 giây',
+            variants: []
+          });
+        }
+
+        const prodObj = productMap.get(prodName);
+        if (badge && !prodObj.badge) prodObj.badge = badge;
+        if (desc) prodObj.description = desc;
+
+        prodObj.variants.push({
+          name: variantName,
+          price: price,
+          originalPrice: origPriceRaw > price ? origPriceRaw : null,
+          inStock: inStock
+        });
+      }
+
+      const result = Array.from(productMap.values());
+      return result.length > 0 ? result : null;
+    }
+
+    async function syncGoogleSheets(showManualFeedback = false) {
+      const refreshIcon = document.getElementById('syncRefreshIcon');
+      if (refreshIcon) refreshIcon.classList.add('animate-spin');
+
+      try {
+        const res = await fetch(`${SHEET_GVIZ_JSON_URL}&_t=${Date.now()}`);
+        if (!res.ok) throw new Error('HTTP ' + res.status);
+
+        const text = await res.text();
+        const parsedProducts = parseGvizJsonResponse(text);
+
+        if (parsedProducts) {
+          state.products = parsedProducts;
+          renderCategories();
+          renderProducts();
+          if (state.selectedProductId) {
+            const stillExists = state.products.find(p => p.id === state.selectedProductId);
+            if (stillExists) renderModalVariants();
+          }
+          if (showManualFeedback) {
+            const toast = document.getElementById('orderToast');
+            document.getElementById('toastOrderText').textContent = `Đã đồng bộ bảng giá mới nhất (${parsedProducts.length} sản phẩm)!`;
+            toast.classList.remove('hidden');
+            if (state.toastTimer) clearTimeout(state.toastTimer);
+            state.toastTimer = setTimeout(hideToast, 4000);
+          }
+        }
+      } catch (err) {
+        // Fallback mượt mà sang dữ liệu 13 sản phẩm tích hợp sẵn
+      } finally {
+        if (refreshIcon) refreshIcon.classList.remove('animate-spin');
+      }
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+      renderCategories();
+      renderProducts();
+      syncGoogleSheets(false);
+    });
+  </script>
+</body>
+</html>
